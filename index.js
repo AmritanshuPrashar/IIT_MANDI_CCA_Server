@@ -16,40 +16,7 @@ const PORT = 4000
 //   });
 
 
-  const sensorSchema = new mongoose.Schema({
-    timestamp: {
-      type: Date,
-      default: Date.now()
-    },
-    data: {
-      temperature: {
-        internal: {
-          type: String
-        },
-        external: {
-          type: String
-        }
-      },
-      pressure: {
-        internal: {
-          type: String
-        },
-        external: {
-          type: String
-        }
-      },
-      humidity: {
-        internal: {
-          type: String
-        },
-        external: {
-          type: String
-        }
-      }
-    }
-  });
-  
-const Sensor = mongoose.model('Sensor', sensorSchema);
+
 app.listen(PORT, () => {
     console.log(`API listening on PORT ${PORT} `)
 })
