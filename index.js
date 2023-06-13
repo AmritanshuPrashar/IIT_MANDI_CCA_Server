@@ -4,18 +4,6 @@ const app = express()
 const PORT = 4000
 
 
-// mongoose.connect("mongodb+srv://amri07:amri07@cluster0.oomopds.mongodb.net/?retryWrites=true&w=majority", {
-//     dbName: "IITMandi_Project",
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true,
-//   });
-//   const db = mongoose.connection;
-//   db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-//   db.once('open', () => {
-//     console.log('Connected to MongoDB');
-//   });
-
-
 
 app.listen(PORT, () => {
     console.log(`API listening on PORT ${PORT} `)
