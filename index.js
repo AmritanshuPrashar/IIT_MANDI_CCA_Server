@@ -54,12 +54,7 @@ app.listen(PORT, () => {
     console.log(`API listening on PORT ${PORT} `)
 })
 
-app.get('/data', async (req, res) => {
-    let data = await Sensor.find();
-    res.json({
-        data: data
-    })
-})
+
 app.get('/', (req, res) => {
   res.send('Hey this is my API running 🥳')
 })
