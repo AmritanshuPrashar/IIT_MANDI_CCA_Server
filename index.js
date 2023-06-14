@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const PORT = 4000
 app.use(express.json());
+var cors = require('cors')
 const mongoose = require("mongoose")
 mongoose.connect("mongodb+srv://amri07:amri07@cluster0.oomopds.mongodb.net/?retryWrites=true&w=majority", {
   dbName: "IITMandi_Project",
