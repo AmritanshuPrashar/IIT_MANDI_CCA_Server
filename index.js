@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const PORT = 4000
-
+app.use(express.json());
 const mongoose = require("mongoose")
 mongoose.connect("mongodb+srv://amri07:amri07@cluster0.oomopds.mongodb.net/?retryWrites=true&w=majority", {
   dbName: "IITMandi_Project",
@@ -48,9 +48,9 @@ app.get("/data", async (req, res) => {
 app.post("/addData", async (req, res) => {
   let data = req.body;
   console.log(data);
-  let uploaded_data = Sensor.create(data);
+  let uploaded_data = await Sensor.create(data);
   res.json({
-    data: uploaded_data;
+    data: uploaded_data
   })
 
 })
