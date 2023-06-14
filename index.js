@@ -4,62 +4,56 @@ const PORT = 4000
 
 const mongoose = require("mongoose")
 mongoose.connect("mongodb+srv://amri07:amri07@cluster0.oomopds.mongodb.net/?retryWrites=true&w=majority", {
-    dbName: "IITMandi_Project",
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  });
-  const db = mongoose.connection;
-  db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-  db.once('open', () => {
-    console.log('Connected to MongoDB');
-  });
+  dbName: "IITMandi_Project",
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', () => {
+  console.log('Connected to MongoDB');
+});
 
 const sensorSchema = new mongoose.Schema({
-    timestamp: {
-      type: Date,
-      default: Date.now()
+  timestamp: {
+    type: Date,
+    default: Date.now()
+  },
+  data: {
+    temperature: {
+      type: String,
     },
-    data: {
-      temperature: {
-        internal: {
-          type: String
-        },
-        external: {
-          type: String
-        }
-      },
-      pressure: {
-        internal: {
-          type: String
-        },
-        external: {
-          type: String
-        }
-      },
-      humidity: {
-        internal: {
-          type: String
-        },
-        external: {
-          type: String
-        }
-      }
+    pressure: {
+      type: String,
+    },
+    humidity: {
+      type: String,
     }
-  });
-  
-  const Sensor = mongoose.model('Sensor', sensorSchema);
+  }
+});
+
+const Sensor = mongoose.model('Sensor', sensorSchema);
 
 
 app.listen(PORT, () => {
-    console.log(`API listening on PORT ${PORT} `)
+  console.log(`API listening on PORT ${PORT} `)
 })
-app.get("/data", async(req, res) => {
-    let data = await Sensor.find();
-    res.json({
-        result: data
-    })
+app.get("/data", async (req, res) => {
+  let data = await Sensor.find();
+  res.json({
+    result: data
+  })
 })
 
+app.post("/addData", async (req, res) => {
+  let data = req.body;
+  console.log(data);
+  let uploaded_data = Sensor.create(data);
+  res.json({
+    data: uploaded_data;
+  })
+
+})
 app.get('/', (req, res) => {
   res.send('Hey this is my API running 🥳')
 })
