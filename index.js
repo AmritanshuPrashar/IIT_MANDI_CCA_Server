@@ -2,7 +2,8 @@ const express = require('express')
 const app = express()
 const PORT = 4000
 app.use(express.json());
-var cors = require('cors')
+// var cors = require('cors')
+// app.use(cors)
 const mongoose = require("mongoose")
 mongoose.connect("mongodb+srv://amri07:amri07@cluster0.oomopds.mongodb.net/?retryWrites=true&w=majority", {
   dbName: "IITMandi_Project",
@@ -22,13 +23,20 @@ const sensorSchema = new mongoose.Schema({
   },
   data: {
     temperature: {
-      type: String,
-    },
-    pressure: {
-      type: String,
+      internal: {
+        type: String
+      },
+      external: {
+        type: String
+      }
     },
     humidity: {
-      type: String,
+      internal: {
+        type: String
+      },
+      external: {
+        type: String
+      }
     }
   }
 });
@@ -40,19 +48,37 @@ app.listen(PORT, () => {
   console.log(`API listening on PORT ${PORT} `)
 })
 app.get("/data", async (req, res) => {
-  let data = await Sensor.find();
-  res.json({
-    result: data
-  })
+
+  try {
+    console.log("\n New Event : Fetching data from the server.")
+    let data = await Sensor.find();
+    res.json({
+      result: data
+    })
+  }
+  catch (err) {
+    res.json({
+      error: err.message
+    })
+  }
 })
 
 app.post("/addData", async (req, res) => {
-  let data = req.body;
-  console.log(data);
-  let uploaded_data = await Sensor.create(data);
-  res.json({
-    data: uploaded_data
-  })
+  try {
+    let data = req.body;
+    console.log("\n New Event : Data to be uploaded : \n");
+    console.log(data)
+    let uploaded_data = await Sensor.create(data);
+    res.json({
+      data: uploaded_data
+    })
+  }
+  catch (err) {
+    res.json({
+      error: err.message
+    })
+  }
+
 
 })
 app.get('/', (req, res) => {
