@@ -47,7 +47,7 @@ exports.filterDataByTimeRange = async (req, res) => {
   try {
     const { startTime, endTime } = req.body;
 
-    const results = await _.find({
+    const results = await Sensor.find({
       timestamp: {
         $gte: new Date(startTime),
         $lte: new Date(endTime)
