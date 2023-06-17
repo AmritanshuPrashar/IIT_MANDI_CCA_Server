@@ -5,4 +5,6 @@ const sensorController = require('../controllers/sensorController');
 router.get('/data', sensorController.getData);
 router.post('/addData', sensorController.addData);
 router.delete('/delData', sensorController.deleteData);
+router.get('/filter', sensorController.filterDataByTimeRange);
 module.exports = router;
+    
