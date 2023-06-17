@@ -4,7 +4,6 @@ exports.getData = async (req, res) => {
   try {
     console.log("\n New Event : Fetching data from the server.");
     let data = await Sensor.find();
-    console.log(formattedTimestamp);
     res.status(200).json({
       result: data
     });

@@ -1,10 +1,9 @@
 const express = require('express');
+const { getData, addData, deleteData, filterDataByTimeRange } = require('../controllers/sensorController');
 const router = express.Router();
-const sensorController = require('../controllers/sensorController');
 
-router.get('/data', sensorController.getData);
-router.post('/addData', sensorController.addData);
-router.delete('/delData', sensorController.deleteData);
-router.get('/filter', sensorController.filterDataByTimeRange);
+router.get('/data', getData);
+router.post('/addData', addData);
+router.delete('/delData', deleteData);
+router.get('/filter', filterDataByTimeRange);
 module.exports = router;
-    
