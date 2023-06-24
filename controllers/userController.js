@@ -45,9 +45,11 @@ async function signUp(req, res) {
         let newUser = await userModel.create(body);
         const token = createToken(newUser._id);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+        console.log("New Event : New user Created");
+        console.log(newUser)
         res.status(201).json({
             newUser: newUser._id,
-            message : "New User Created"
+            message: "New User Created"
         });
     } catch (error) {
         const errors = handleErrors(error);
