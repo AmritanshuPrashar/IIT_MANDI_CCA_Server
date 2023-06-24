@@ -5,7 +5,8 @@ const db = require('./config/database');
 const userRoutes = require('./routes/userRoutes')
 const sensorRoutes = require('./routes/sensorRoutes');
 const cors = require("cors");
-
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 // Enable CORS
 app.use(cors());
 
