@@ -60,7 +60,7 @@ async function signUp(req, res) {
 async function login(req, res) {
     try {
         let body = req.body;
-        let user = await userModel.findOne({ username: body.email });
+        let user = await userModel.findOne({ email: body.email });
         if (user) {
             if (user.password == body.password) {
                 const token = createToken(user._id);
