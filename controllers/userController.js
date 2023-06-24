@@ -45,9 +45,12 @@ async function signUp(req, res) {
         let newUser = await userModel.create(body);
         const token = createToken(newUser._id);
         res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
-        res.status(201).json({ newUser: user._id });
+        res.status(201).json({
+            newUser: newUser._id,
+            message : "New User Created"
+        });
     } catch (error) {
-        const errors = handleErrors(err);
+        const errors = handleErrors(error);
         res.status(400).json({ errors });
     }
 }
@@ -55,7 +58,7 @@ async function signUp(req, res) {
 async function login(req, res) {
     try {
         let body = req.body;
-        let user = await userModel.findOne({ username: body.username });
+        let user = await userModel.findOne({ username: body.email });
         if (user) {
             if (user.password == body.password) {
                 const token = createToken(user._id);
