@@ -28,12 +28,14 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minLength: 8
+        minLength: 8,
+        default: "Google_SignIn"
     },
     confirmPassword: {
         type: String,
         required: true,
         minLength: 8,
+        default: "Google_SignIn",
         validate: {
             validator: function (confirmPassword) {
                 return confirmPassword === this.password;
