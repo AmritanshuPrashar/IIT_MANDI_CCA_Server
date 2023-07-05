@@ -46,7 +46,16 @@ const userSchema = new mongoose.Schema({
     role: {
         type: String,
         default: 'user'
+    },
+    accountType: {
+        type: String,
+        default: 'other',
+    },
+    organizationName: {
+        type: String,
+        required: true
     }
+
 }
 )
 

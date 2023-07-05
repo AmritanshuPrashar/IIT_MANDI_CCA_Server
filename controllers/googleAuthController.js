@@ -17,16 +17,13 @@ passport.use(new GoogleStrategy({
 },
   async (accessToken, refreshToken, profile, done) => {
     try {
-      // Create or find the user in the database
       let user = await User.findOne({ email: profile.emails[0].value });
 
       if (user) {
-        // If the user exists, update the profile
         user.firstName = profile.name.givenName;
         user.lastName = profile.name.familyName;
         user = await user.save();
       } else {
-        // Create a new user
         user = await User.create({
           firstName: profile.name.givenName,
           lastName: profile.name.familyName,
@@ -35,7 +32,7 @@ passport.use(new GoogleStrategy({
       }
         newUser = user;
       
-      done(null, user); // Pass the user object and token to the done function
+      done(null, user); 
     } catch (err) {
       done(err);
     }
@@ -60,11 +57,9 @@ const signin = passport.authenticate('google', { scope: ['profile', 'email'] });
 const signinCallback = passport.authenticate('google', { failureRedirect: '/login' });
 
 const dashboard = (req, res) => {
-  // Access the user object and token from the passport callback using req.user
     const token = createToken(newUser._id);
 
 
-  // Set the cookie with the token
   res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
 
   res.status(201).json({
