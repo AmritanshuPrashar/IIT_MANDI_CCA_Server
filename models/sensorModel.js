@@ -8,22 +8,52 @@ const sensorSchema = new mongoose.Schema({
   data: {
     temperature: {
       internal: {
-        type: String
+        Sensor1: { type: String },
+        Sensor2: { type: String },
+        Sensor3: { type: String },
+        Sensor4: { type: String },
+        Sensor5: { type: String },
+        Sensor6: { type: String },
+        Sensor7: { type: String },
+        Sensor8: { type: String },
       },
       external: {
-        type: String
+        Sensor1: { type: String },
+        Sensor2: { type: String },
+        Sensor3: { type: String },
+        Sensor4: { type: String },
+        Sensor5: { type: String },
+        Sensor6: { type: String },
+        Sensor7: { type: String },
+        Sensor8: { type: String },
       }
     },
     humidity: {
       internal: {
-        type: String
+        Sensor1: { type: String },
+        Sensor2: { type: String },
+        Sensor3: { type: String },
+        Sensor4: { type: String },
+        Sensor5: { type: String },
+        Sensor6: { type: String },
+        Sensor7: { type: String },
+        Sensor8: { type: String },
       },
       external: {
-        type: String
+        Sensor1: { type: String },
+        Sensor2: { type: String },
+        Sensor3: { type: String },
+        Sensor4: { type: String },
+        Sensor5: { type: String },
+        Sensor6: { type: String },
+        Sensor7: { type: String },
+        Sensor8: { type: String },
       }
     }
   }
 });
+
+
 
 const Sensor = mongoose.model('Sensor', sensorSchema);
 

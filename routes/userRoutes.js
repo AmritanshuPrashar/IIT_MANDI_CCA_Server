@@ -3,6 +3,7 @@ const { getAllUsers, signUp, deleteAll, protectRoute, getUserProfile, login } = 
 const router = express.Router();
 const passport = require('passport');
 const { signin, signinCallback, dashboard } = require("../controllers/googleAuthController");
+const downloadData = require("../controllers/nodemailerController");
 
 router.get('/allUsers', getAllUsers);
 router.post('/signup', signUp);
@@ -21,4 +22,6 @@ router.use(protectRoute)
 router
     .route('/userProfile')
     .get(getUserProfile)
+
+router.get('/download',downloadData);
 module.exports = router;
