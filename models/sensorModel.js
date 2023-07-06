@@ -29,7 +29,7 @@ const sensorDataSchema = new mongoose.Schema({
       }
     },
     humidity: {
-      inside: {
+      internal: {
         Sensor1: String,
         Sensor2: String,
         Sensor3: String,
@@ -39,7 +39,7 @@ const sensorDataSchema = new mongoose.Schema({
         Sensor7: String,
         Sensor8: String
       },
-      outside: {
+      external: {
         Sensor1: String,
         Sensor2: String,
         Sensor3: String,
@@ -51,7 +51,7 @@ const sensorDataSchema = new mongoose.Schema({
       }
     },
     soilTemperature: {
-      inside: {
+      internal: {
         Sensor1: String,
         Sensor2: String,
         Sensor3: String,
@@ -64,28 +64,24 @@ const sensorDataSchema = new mongoose.Schema({
     },
     pyranometer: {
       Sensor1: String
-    }
-    ,
+    },
     waterTemperature: {
       Sensor1: String,
-      Sensor2: String,
+      Sensor2: String
     },
     co2: {
       Sensor1: String,
-      Sensor2: String,
-
+      Sensor2: String
     },
     light: {
       Sensor1: String,
-      Sensor2: String,
-
+      Sensor2: String
     },
     moisture: {
       Sensor1: String,
       Sensor2: String,
       Sensor3: String,
-      Sensor4: String,
-
+      Sensor4: String
     },
     actuators: {
       Sensor1: String,
@@ -93,8 +89,7 @@ const sensorDataSchema = new mongoose.Schema({
       Sensor3: String,
       Sensor4: String,
       Sensor5: String,
-      Sensor6: String,
-
+      Sensor6: String
     }
   }
 });
