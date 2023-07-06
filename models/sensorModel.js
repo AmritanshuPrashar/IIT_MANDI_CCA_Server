@@ -36,10 +36,6 @@ const sensorDataSchema = new mongoose.Schema({
         Sensor2: String,
         Sensor3: String,
         Sensor4: String,
-        Sensor5: String,
-        Sensor6: String,
-        Sensor7: String,
-        Sensor8: String
       }
     },
     pyranometer: {
