@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb+srv://amri07:amri07@cluster0.oomopds.mongodb.net/?retryWrites=true&w=majority", {
+mongoose.connect("mongodb://127.0.0.1:27017", {
   dbName: "IITMandi_Project",
   useNewUrlParser: true,
   useUnifiedTopology: true,
