@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 const maxAge = 3 * 24 * 60 * 60;
 
 const createToken = (id) => {
-    return jwt.sign({ id }, 'iitmandi', {
+    return jwt.sign({ id }, process.env.JWT_KEY, {
         expiresIn: maxAge
     });
 };
@@ -93,7 +93,7 @@ async function protectRoute(req, res, next) {
         if (req.cookies.jwt) {
             token = req.cookies.jwt
             let payload = jwt.verify(token, "iitmandi");
-            console.log(payload.id)
+            // console.log(payload.id)
             if (payload) {
                 const user = await userModel.findById(payload.id)
                 req.body.role = user.role;
@@ -119,6 +119,31 @@ async function protectRoute(req, res, next) {
     }
 }
 
+const checkDataAccess = async (req, res, next) => {
+    let token;
+    if (req.cookies.jwt) {
+        token = req.cookies.jwt
+        let payload = jwt.verify(token, "iitmandi");
+        // console.log(payload.id)
+        if (payload) {
+            const user = await userModel.findById(payload.id)
+            // console.log(user)
+            if (user.dataAccess == true)
+                next();
+            else {
+                res.status(401).json({
+                    message: "User have no data access"
+                })
+            }
+        }
+        else {
+            return res.status(401).json({
+                message: "Login again."
+            });
+        }
+    }
+}
+
 async function getUserProfile(req, res) {
     let id = req.body.id;
     let user = await userModel.findById(id);
@@ -139,12 +164,54 @@ async function deleteAll(req, res) {
     })
 }
 
+const isAuthorised = (roles) => (req, res, next) => {
+    if (roles.includes(req.body.role)) {
+        next();
+    } else {
+        res.json({
+            message: "User not authorised"
+        })
+    }
+};
+
+const revokeAccess = async (req, res) => {
+    let userMail = req.body.email;
+    let user = await userModel.findOne({ email: userMail });
+    if (user) {
+        if (user.role == 'admin') {
+            res.json({
+                message: "You cannot revoke access of other admin."
+            })
+        } else {
+            if (user.dataAccess) {
+                user.dataAccess = false;
+                await user.save();
+                res.status(200).json({
+                    message: 'Data Access Revoked'
+                });
+            } else {
+                res.status(200).json({
+                    message: 'User already have no Access'
+                });
+            }
+        }
+    } else {
+        res.status(404).json({
+            message: 'No user with this email address'
+        });
+    }
+};
+
+
 module.exports = {
     signUp,
     getAllUsers,
     deleteAll,
     protectRoute,
     getUserProfile,
-    login
+    login,
+    isAuthorised,
+    revokeAccess,
+    checkDataAccess
 
 }

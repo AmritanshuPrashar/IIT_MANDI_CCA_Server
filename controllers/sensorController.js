@@ -2,8 +2,10 @@ const Sensor = require('../models/sensorModel');
 
 exports.getData = async (req, res) => {
   try {
-    console.log("\n New Event : Fetching data from the server.");
-    let data = await Sensor.find();
+    const plantId = req.params.plantId; 
+    console.log(`\nNew Event: Fetching data for Plant ${plantId} from the server.`);
+    
+    let data = await Sensor.find({ plantId }); 
     res.status(200).json({
       result: data
     });
@@ -16,9 +18,13 @@ exports.getData = async (req, res) => {
 
 exports.addData = async (req, res) => {
   try {
+    const plantId = req.params.plantId; 
     let data = req.body;
-    console.log("\n New Event : Data to be uploaded : \n");
+    console.log(`\nNew Event: Data to be uploaded for Plant ${plantId}:\n`);
     console.log(data);
+    
+    data.plantId = plantId;
+
     let uploadedData = await Sensor.create(data);
     res.status(201).json({
       data: uploadedData
@@ -32,9 +38,10 @@ exports.addData = async (req, res) => {
 
 exports.deleteData = async (req, res) => {
   try {
-    await Sensor.deleteMany();
+    const plantId = req.params.plantId; 
+    await Sensor.deleteMany({ plantId }); 
     res.status(200).json({
-      message: "All data deleted successfully."
+      message: `All data for Plant ${plantId} deleted successfully.`
     });
   } catch (err) {
     res.json({
@@ -45,9 +52,11 @@ exports.deleteData = async (req, res) => {
 
 exports.filterDataByTimeRange = async (req, res) => {
   try {
+    const plantId = req.params.plantId; 
     const { startTime, endTime } = req.body;
 
     const results = await Sensor.find({
+      plantId,
       timestamp: {
         $gte: new Date(startTime),
         $lte: new Date(endTime)
@@ -61,3 +70,19 @@ exports.filterDataByTimeRange = async (req, res) => {
     res.status(500).json({ error: 'An error occurred' });
   }
 }
+
+exports.updateSensorData = async (req, res) => {
+  try {
+    const plantId = req.params.plantId;
+    const { data } = req.body;
+
+    // Update the sensor data in the database
+    await Sensor.findOneAndUpdate({ plantId }, { data }, { upsert: true });
+
+    res.status(200).json({ message: `Sensor data updated successfully.` });
+  } catch (error) {
+    console.error(`Failed to update sensor data:`, error);
+    res.status(500).json({ error: 'An error occurred while updating sensor data.' });
+  }
+};
+

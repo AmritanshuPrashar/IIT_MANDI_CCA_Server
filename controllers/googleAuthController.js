@@ -5,15 +5,15 @@ const jwt = require('jsonwebtoken')
 
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-  return jwt.sign({ id }, 'iitmandi', {
+  return jwt.sign({ id }, process.env.JWT_KEY, {
     expiresIn: maxAge
   });
 };
 let newUser;
 passport.use(new GoogleStrategy({
-  clientID: "183702925686-d8abqnknae8frlmouqckssa5s99kncsf.apps.googleusercontent.com",
-  clientSecret: "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",
-  callbackURL: '/user/auth/google/callback'
+  clientID: process.env.CLIENT_ID,
+  clientSecret: process.env.CLIENT_SECRET,
+  callbackURL: process.env.CALLBACK_URL
 },
   async (accessToken, refreshToken, profile, done) => {
     try {

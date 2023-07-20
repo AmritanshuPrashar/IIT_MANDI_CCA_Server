@@ -45,6 +45,7 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
+        enum: ['admin', 'user', 'other'],
         default: 'user'
     },
     accountType: {
@@ -53,11 +54,16 @@ const userSchema = new mongoose.Schema({
     },
     organizationName: {
         type: String,
+        default : "Google_SignIn",
         required: true
+    },
+    dataAccess: {
+        type: Boolean,
+        default: true
     }
 
 }
 )
 
 const userModel = mongoose.model("userModel", userSchema);
-module.exports = userModel
+module.exports = userModel;

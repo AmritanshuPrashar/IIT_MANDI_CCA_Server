@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const sensorDataSchema = new mongoose.Schema({
+  plantId: {
+    type: String,
+    required: true
+  },
   timestamp: {
     type: Date,
     default: Date.now
@@ -70,6 +74,6 @@ const sensorDataSchema = new mongoose.Schema({
   }
 });
 
-const SensorData = mongoose.model('Sensor', sensorDataSchema);
+const SensorData = mongoose.model('SensorData', sensorDataSchema);
 
 module.exports = SensorData;

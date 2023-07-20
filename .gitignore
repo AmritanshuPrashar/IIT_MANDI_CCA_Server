@@ -1,0 +1,183 @@
+# Compiled files
+*.class
+*.o
+*.pyc
+*.pyo
+*.dll
+*.exe
+*.obj
+*.so
+*.dylib
+
+# Temporary files
+*~
+.#*
+.*.swp
+*.log
+*.tmp
+
+# Version control and backup files
+/.svn
+/.hg
+/.git
+/.bzr
+*.orig
+
+# IDE-specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.sln
+*.user
+*.tmproj
+*.ipr
+*.iws
+*.classpath
+*.project
+.settings/
+
+# Build output and dependency directories
+/dist/
+/build/
+/bin/
+/out/
+/obj/
+/.gradle/
+/.idea/
+/mvnw
+/mvnw.cmd
+/target/
+/.metadata/
+npm-debug.log
+yarn-error.log
+
+# Logs
+*.log.*
+logs/
+
+# Package files
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Image Thumbnails
+thumbs.db
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# macOS specific files
+.AppleDouble
+.LSOverride
+
+# Windows thumbnail cache files
+ehthumbs.db
+ehthumbs_vista.db
+
+# Node.js specific files
+node_modules/
+npm-debug.log.*
+yarn-error.log.*
+
+# Editor specific backup files
+*.bak
+*.backup
+*.swp
+
+# Compiled Python files
+__pycache__/
+*.py[cod]
+
+# Virtual environment
+venv/
+env/
+*.env
+.env
+
+# Environment variables
+.env.local
+.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Compiled Java files
+*.class
+
+# Compiled C# files
+*.dll
+*.exe
+*.pdb
+
+# Compiled Objective-C files
+*.o
+*.a
+*.app
+
+# Compiled Swift files
+*.swiftmodule
+*.swiftdoc
+*.swiftsourceinfo
+
+# Package files
+*.jar
+*.war
+*.ear
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# Gradle
+.gradle/
+/build/
+.gradle/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.ipr
+*.iws
+/.idea/
+
+# Eclipse
+.classpath
+.project
+.settings/
+/bin/
+/.classpath
+/.project
+
+# Visual Studio
+*.sln
+*.csproj
+*.csproj.user
+*.vcxproj
+*.vcxproj.filters
+*.dll
+*.exe
+
+# Unity
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/Assets/AssetStoreTools*
+
+# macOS
+.DS_Store
+
+# User-specific
+/Apps/*
+/Downloads/*
