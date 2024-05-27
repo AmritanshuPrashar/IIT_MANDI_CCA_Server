@@ -14,13 +14,12 @@ const fs = require('fs');
 app.use(cookieParser());
 require('dotenv').config();
 
-// Enable CORS
-app.use(cors());
-app.use(session({
-  secret: 'IITMANDI',
-  resave: false,
-  saveUninitialized: false,
-}));
+
+app.use(cors(
+  origin = '*', 
+  methods = 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials = true
+));
 app.get('/', (req, res) => {
   res.json({
     message: {
@@ -29,8 +28,6 @@ app.get('/', (req, res) => {
     }
   })
 })
-app.use(passport.initialize());
-app.use(passport.session());
 app.use(express.json());
 app.use('/sensor', sensorRoutes);
 app.use('/user', userRoutes);

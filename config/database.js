@@ -1,8 +1,7 @@
 require('dotenv').config();
 const mongoose = require("mongoose");
 
-mongoose.connect(process.env.MONGO_URL, {
-  dbName: "IITMandi_Project",
+mongoose.connect('mongodb://amri07:amri07@ac-scyyw6d-shard-00-00.m28ixj3.mongodb.net:27017,ac-scyyw6d-shard-00-01.m28ixj3.mongodb.net:27017,ac-scyyw6d-shard-00-02.m28ixj3.mongodb.net:27017/?ssl=true&replicaSet=atlas-rwro3h-shard-0&authSource=admin&retryWrites=true&w=majority&appName=Cluster0', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });

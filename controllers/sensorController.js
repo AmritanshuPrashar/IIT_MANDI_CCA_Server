@@ -76,7 +76,6 @@ exports.updateSensorData = async (req, res) => {
     const plantId = req.params.plantId;
     const { data } = req.body;
 
-    // Update the sensor data in the database
     await Sensor.findOneAndUpdate({ plantId }, { data }, { upsert: true });
 
     res.status(200).json({ message: `Sensor data updated successfully.` });

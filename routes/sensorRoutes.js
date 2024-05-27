@@ -3,11 +3,12 @@ const { getData, addData, deleteData, filterDataByTimeRange, updateSensorData } 
 const { checkDataAccess } = require('../controllers/userController');
 const router = express.Router();
 
-router.get('/:plantId/data', getData); // Route with the plant ID parameter
-router.post('/:plantId/addData', addData); // Route with the plant ID parameter
-router.delete('/:plantId/delData', deleteData); // Route with the plant ID parameter
-router.get('/:plantId/filter', filterDataByTimeRange); // Route with the plant ID parameter
-// Add this route to the existing sensorRoutes.js file
+
+router.use(checkDataAccess);
+router.get('/:plantId/data', getData); 
+router.post('/:plantId/addData', addData); 
+router.delete('/:plantId/delData', deleteData); 
+router.get('/:plantId/filter', filterDataByTimeRange); 
 router.post('/:plantId/updateData', updateSensorData);
 
 module.exports = router;

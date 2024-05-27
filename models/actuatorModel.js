@@ -32,7 +32,6 @@ const actuatorSchema = new mongoose.Schema({
           type: String,
           default: "Auto"
         }
-        // Add more sensors as needed
       }
     }
   ]

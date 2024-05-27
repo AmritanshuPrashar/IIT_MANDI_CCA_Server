@@ -9,13 +9,11 @@ exports.updateValue = async (req, res) => {
       const updatedValue = await actuatorModel.findOne(filter);
   
       if (!updatedValue) {
-        // Plant doesn't exist, create a new document
         const newPlant = { name: plantName, sensors };
         await actuatorModel.create({ plants: [newPlant] });
         return res.json(newPlant);
       }
   
-      // Update the existing plant's sensors
       const updatedPlant = updatedValue.plants.find((plant) => plant.name === plantName);
       updatedPlant.sensors = sensors;
       await updatedValue.save();

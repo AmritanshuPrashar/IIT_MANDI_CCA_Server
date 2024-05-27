@@ -8,7 +8,6 @@ async function sendSensorDataAsCSV(data, email) {
   try {
     const plants = {};
 
-    // Group data by plantId
     data.forEach(item => {
       const plantId = item.plantId;
       if (!plants[plantId]) {
@@ -17,7 +16,6 @@ async function sendSensorDataAsCSV(data, email) {
       plants[plantId].push(item);
     });
 
-    // Prepare and send email for each plant
     for (const plantId in plants) {
       const plantData = plants[plantId];
       const csvWriter = createObjectCsvWriter({
@@ -102,15 +100,14 @@ async function sendSensorDataAsCSV(data, email) {
         'actuators.Sensor6': item.data.actuators.Sensor6,
       }));
 
-      // Write CSV data for the current plant
       await csvWriter.writeRecords(csvData);
 
-      // Configure Nodemailer transporter
       const transporter = nodemailer.createTransport({
-        service: 'gmail',
+        service: 'smtp.mandrillapp.com',
+        port: 587,
         auth: {
-          user: process.env.NODEMAILER_ID,
-          pass: process.env.NODEMAILER_PASS,
+          user: "pifof49035@buzblox.com",
+          pass: "md-JJsyI3OvFIB7GNqyxeGqPQ  ",
         },
       });
 
@@ -146,8 +143,8 @@ async function downloadData(req, res) {
     console.log(user.email);
     const email = user.email;
 
-    const from = req.body.from; // Start timestamp
-    const to = req.body.to; // End timestamp
+    const from = req.body.from; 
+    const to = req.body.to;
 
     const data = await sensorModel.find({
       timestamp: {
